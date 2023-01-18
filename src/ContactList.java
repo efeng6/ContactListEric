@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class ContactList
 {
     // TODO: Create your array contacts
-    private ArrayList<Person> contacts = new ArrayList<Person>();
+    private ArrayList<Person> contacts;
 
 
     // TODO: Write a Constructor
@@ -23,7 +23,7 @@ public class ContactList
 
 
     public ContactList() {
-
+        contacts = new ArrayList<Person>();
     }
 
 
@@ -51,6 +51,30 @@ public class ContactList
         System.out.println("Select a type of contact to add:");
         System.out.println("1: Student");
         System.out.println("2: Worker");
+        int typeOfPerson = 0;
+        while (typeOfPerson != 1 && typeOfPerson != 2)
+        {
+            typeOfPerson = s.nextInt();
+        }
+        s.nextLine();
+        System.out.println("Please fill in the following information");
+        System.out.println("First Name:");
+        String fname = s.nextLine();
+        System.out.println("Last Name:");
+        String lname = s.nextLine();
+        System.out.println("Phone number:");
+        String pnum = s.nextLine();
+        if(typeOfPerson == 1)
+        {
+            System.out.println("Grade: ");
+            contacts.add(new Student(fname, lname, pnum, s.nextInt()));
+        }
+        else
+        {
+            System.out.println("Job: ");
+            contacts.add(new Worker(fname, lname, pnum, s.nextLine()));
+        }
+
 
     }
 
@@ -59,6 +83,9 @@ public class ContactList
      */
     public void printContacts() {
         // TODO: Complete the printContacts method
+        for (Person contact : contacts) {
+            System.out.println(contact.toString());
+        }
     }
 
     /**
@@ -68,6 +95,7 @@ public class ContactList
      */
     public void sort(int sortBy) {
         // TODO: Complete the sort method
+
     }
 
     // TODO: Write searchByFirstName
@@ -76,11 +104,32 @@ public class ContactList
 
     // TODO: Write searchByPhoneNumber
 
+    public Person searchByFirstName(String firstName)
+    {
+
+    }
+    public Person searchByLastName(String lastName)
+    {
+
+    }
+    public Person searchByPhoneNumber(String phoneNumber)
+    {
+
+    }
+
     /**
      * Lists just the Student objects in the Contact List
      */
     public void listStudents() {
         // TODO: Complete the listStudents method
+        for (Person contact : contacts) {
+            if (contact instanceof Student)
+            {
+                System.out.println(contact.toString());
+            }
+
+        }
+
     }
 
     /**
