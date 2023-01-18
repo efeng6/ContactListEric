@@ -95,6 +95,49 @@ public class ContactList
      */
     public void sort(int sortBy) {
         // TODO: Complete the sort method
+        if (sortBy == 0)
+        {
+            for (int i = 0; i < contacts.size(); i++)
+            {
+                for (int j = 0; j < contacts.size() - i; j++)
+                {
+                    if(contacts.get(j).getFirstName().compareTo(contacts.get(j).getFirstName()) > 0)
+                    {
+                        Person temp = contacts.set(j + 1, contacts.get(j));
+                        contacts.set(j, temp);
+                    }
+                }
+            }
+        }
+        if (sortBy == 1)
+        {
+            for (int i = 0; i < contacts.size(); i++)
+            {
+                for (int j = 0; j < contacts.size() - i; j++)
+                {
+                    if(contacts.get(j).getLastName().compareTo(contacts.get(j).getLastName()) > 0)
+                    {
+                        Person temp = contacts.set(j + 1, contacts.get(j));
+                        contacts.set(j, temp);
+                    }
+                }
+            }
+        }
+        if (sortBy == 2)
+        {
+            for (int i = 0; i < contacts.size(); i++)
+            {
+                for (int j = 0; j < contacts.size() - i; j++)
+                {
+                    if(contacts.get(j).getPhoneNumber().compareTo(contacts.get(j).getPhoneNumber()) > 0)
+                    {
+                        Person temp = contacts.set(j + 1, contacts.get(j));
+                        contacts.set(j, temp);
+                    }
+                }
+            }
+        }
+
 
     }
 
