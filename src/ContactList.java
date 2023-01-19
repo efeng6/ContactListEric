@@ -8,17 +8,14 @@ import java.util.ArrayList;
  *
  * Created for Menlo School CS2
  *
- * @author: Ms. Namasivayam & Mr. Blick
+ * @author: Ms. Namasivayam & Mr. Blick & Eric F
  * @version: 2022-2023
  */
 
 public class ContactList
 {
-    // TODO: Create your array contacts
     private ArrayList<Person> contacts;
-
-
-    // TODO: Write a Constructor
+    Scanner s = new Scanner(System.in);
 
 
 
@@ -47,7 +44,6 @@ public class ContactList
      */
     public void addContact() {
         // TODO: Complete the addContact method
-        Scanner s = new Scanner(System.in);
         System.out.println("Select a type of contact to add:");
         System.out.println("1: Student");
         System.out.println("2: Worker");
@@ -149,15 +145,17 @@ public class ContactList
 
     public Person searchByFirstName(String firstName)
     {
+        sort(0);
 
     }
     public Person searchByLastName(String lastName)
     {
+        sort(1);
 
     }
     public Person searchByPhoneNumber(String phoneNumber)
     {
-
+        sort(2);
     }
 
     /**
@@ -183,8 +181,40 @@ public class ContactList
         System.out.println("Welcome to your Contacts List");
         System.out.println("Please pick from the following menu options");
         printMenuOptions();
-
+        int num = s.nextInt();
+        s.nextLine();
         // TODO: Complete the run method
+        while (num != 0)
+        {
+            if(num == 1)
+                addContact();
+            if(num == 2){
+                sort(0);
+                printContacts();
+            }
+            if(num == 3){
+                sort(1);
+                printContacts();
+            }
+            if(num == 4){
+                sort(2);
+                printContacts();
+            }
+            if(num == 5){
+                listStudents();
+            }
+            if(num == 6){
+
+            }
+            if(num == 7){
+
+            }
+            if(num == 8){
+
+            }
+            num = s.nextInt();
+            s.nextLine();
+        }
     }
 
 
