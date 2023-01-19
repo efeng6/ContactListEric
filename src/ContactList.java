@@ -204,13 +204,16 @@ public class ContactList
                 listStudents();
             }
             if(num == 6){
-
+                System.out.println("Enter a name: ");
+                searchByFirstName(s.nextLine());
             }
             if(num == 7){
-
+                System.out.println("Enter a name: ");
+                searchByLastName(s.nextLine());
             }
             if(num == 8){
-
+                System.out.println("Enter a number: ");
+                searchByPhoneNumber(s.nextLine());
             }
             num = s.nextInt();
             s.nextLine();
