@@ -43,7 +43,6 @@ public class ContactList
      * to the contact list
      */
     public void addContact() {
-        // TODO: Complete the addContact method
         System.out.println("Select a type of contact to add:");
         System.out.println("1: Student");
         System.out.println("2: Worker");
@@ -78,7 +77,6 @@ public class ContactList
      * Loops through and prints all contacts
      */
     public void printContacts() {
-        // TODO: Complete the printContacts method
         for (Person contact : contacts) {
             System.out.println(contact.toString());
         }
@@ -90,14 +88,16 @@ public class ContactList
      * @param sortBy: 0=firstName, 1=lastName, 2=phoneNumber
      */
     public void sort(int sortBy) {
-        // TODO: Complete the sort method
         if (sortBy == 0)
         {
             for (int i = 0; i < contacts.size(); i++)
             {
-                for (int j = 0; j < contacts.size() - i; j++)
+                for (int j = 0; j < contacts.size() - i-1; j++)
                 {
-                    if(contacts.get(j).getFirstName().compareTo(contacts.get(j).getFirstName()) > 0)
+                    /**
+                     * compares element of one person to the same of the one ahead of it
+                     */
+                    if(contacts.get(j).getFirstName().compareTo(contacts.get(j+1).getFirstName()) > 0)
                     {
                         Person temp = contacts.set(j + 1, contacts.get(j));
                         contacts.set(j, temp);
@@ -105,13 +105,16 @@ public class ContactList
                 }
             }
         }
-        if (sortBy == 1)
+        else if (sortBy == 1)
         {
             for (int i = 0; i < contacts.size(); i++)
             {
-                for (int j = 0; j < contacts.size() - i; j++)
+                for (int j = 0; j < contacts.size() - i-1; j++)
                 {
-                    if(contacts.get(j).getLastName().compareTo(contacts.get(j).getLastName()) > 0)
+                    /**
+                     * compares element of one person to the same of the one ahead of it
+                     */
+                    if(contacts.get(j).getLastName().compareTo(contacts.get(j+1).getLastName()) > 0)
                     {
                         Person temp = contacts.set(j + 1, contacts.get(j));
                         contacts.set(j, temp);
@@ -119,13 +122,16 @@ public class ContactList
                 }
             }
         }
-        if (sortBy == 2)
+        else if (sortBy == 2)
         {
             for (int i = 0; i < contacts.size(); i++)
             {
-                for (int j = 0; j < contacts.size() - i; j++)
+                for (int j = 0; j < contacts.size() - i-1; j++)
                 {
-                    if(contacts.get(j).getPhoneNumber().compareTo(contacts.get(j).getPhoneNumber()) > 0)
+                    /**
+                     * compares element of one person to the same of the one ahead of it
+                     */
+                    if(contacts.get(j).getPhoneNumber().compareTo(contacts.get(j+1).getPhoneNumber()) > 0)
                     {
                         Person temp = contacts.set(j + 1, contacts.get(j));
                         contacts.set(j, temp);
@@ -137,32 +143,87 @@ public class ContactList
 
     }
 
-    // TODO: Write searchByFirstName
-
-    // TODO: Write searchByLastName
-
-    // TODO: Write searchByPhoneNumber
-
+    /**
+     * Linear search (lol) by first and last names, as well as phone number
+     * @param firstName
+     * @return
+     */
     public Person searchByFirstName(String firstName)
     {
-        sort(0);
-
+        for (Person p : contacts)
+        {
+            if (p.getFirstName().equals(firstName))
+                return p;
+        }
+        return null;
     }
     public Person searchByLastName(String lastName)
     {
-        sort(1);
-
+        for (Person p : contacts)
+        {
+            if (p.getLastName().equals(lastName))
+                return p;
+        }
+        return null;
     }
     public Person searchByPhoneNumber(String phoneNumber)
     {
-        sort(2);
+        for (Person p : contacts)
+        {
+            if (p.getPhoneNumber().equals(phoneNumber))
+                return p;
+        }
+        return null;
+    }
+
+    /**
+     * Binary search, need to sort first
+     * Also not used b/c I wasn't sure if I had to use the linear or not
+     * And b/c it is not tested and is kinda cruddy
+     * @param target
+     * @param type (same params as sort method)
+     * @param low
+     * @param high
+     * @return
+     */
+    public Person search(String target, int type, int low, int high)
+    {
+        int mid = (low + high) / 2;
+        if (type == 0)
+        {
+            if (contacts.get(mid).getFirstName().equals(target))
+                return contacts.get(mid);
+            else if (contacts.get(mid).getFirstName().compareTo(target) > 0)
+                return search(target, type, mid + 1, high);
+            else
+                return search(target, type, low, mid - 1);
+        }
+        if (type == 1)
+        {
+            if (contacts.get(mid).getLastName().equals(target))
+                return contacts.get(mid);
+            else if (contacts.get(mid).getLastName().compareTo(target) > 0)
+                return search(target, type, mid + 1, high);
+            else
+                return search(target, type, low, mid - 1);
+        }
+        if (type == 2)
+        {
+            if (contacts.get(mid).getPhoneNumber().equals(target))
+                return contacts.get(mid);
+            else if (contacts.get(mid).getPhoneNumber().compareTo(target) > 0)
+                return search(target, type, mid + 1, high);
+            else
+                return search(target, type, low, mid - 1);
+        }
+        else
+            return null;
     }
 
     /**
      * Lists just the Student objects in the Contact List
      */
     public void listStudents() {
-        // TODO: Complete the listStudents method
         for (Person contact : contacts) {
             if (contact instanceof Student)
             {
@@ -183,7 +244,6 @@ public class ContactList
         printMenuOptions();
         int num = s.nextInt();
         s.nextLine();
-        // TODO: Complete the run method
         while (num != 0)
         {
             if(num == 1)
@@ -205,16 +265,32 @@ public class ContactList
             }
             if(num == 6){
                 System.out.println("Enter a name: ");
-                searchByFirstName(s.nextLine());
+                String str = s.nextLine();
+                Person p = searchByFirstName(str);
+                if(p == null)
+                    System.out.println(str + " is not in the list.");
+                else
+                    System.out.println(p);
             }
             if(num == 7){
                 System.out.println("Enter a name: ");
-                searchByLastName(s.nextLine());
+                String str = s.nextLine();
+                Person p = searchByLastName(str);
+                if(p == null)
+                    System.out.println(str + " is not in the list.");
+                else
+                    System.out.println(p);
             }
             if(num == 8){
                 System.out.println("Enter a number: ");
-                searchByPhoneNumber(s.nextLine());
+                String str = s.nextLine();
+                Person p = searchByPhoneNumber(str);
+                if(p == null)
+                    System.out.println(str + " is not in the list.");
+                else
+                    System.out.println(p);
             }
+            printMenuOptions();
             num = s.nextInt();
             s.nextLine();
         }

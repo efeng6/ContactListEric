@@ -14,6 +14,10 @@ public class Worker extends Person{
 
     }
 
+    @Override
+    /**
+     * Person's toString plus some stuff
+     */
     public String toString()
     {
         return super.toString() + " Job: " + job;

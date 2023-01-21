@@ -8,7 +8,6 @@
  */
 
 public class Person {
-    // TODO: Complete the Person class
     String firstName;
     String lastName;
     String phoneNumber;
@@ -34,7 +33,7 @@ public class Person {
 
     public String toString()
     {
-        return firstName + lastName +" - #" + phoneNumber;
+        return firstName + " " + lastName +" - #" + phoneNumber;
     }
 
 }

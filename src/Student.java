@@ -8,7 +8,6 @@
  */
 
 public class Student extends Person{
-    // TODO: Modify and complete this class
     public int grade;
     public Student(String firstName, String lastName, String phoneNumber, int grade) {
         super(firstName, lastName, phoneNumber);
@@ -19,6 +18,10 @@ public class Student extends Person{
         return grade;
     }
 
+    @Override
+    /**
+     * Person's toString plus some stuff
+     */
     public String toString()
     {
         return super.toString() +  " Grade:" + grade;
